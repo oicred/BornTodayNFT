@@ -1,5 +1,6 @@
 import axios from "axios";
 import Link from "next/link";
+import { useWeb3 } from "@3rdweb/hooks"
 import { FormEvent, useState } from "react";
 import {
   CheckAnswerPayload,
@@ -7,6 +8,12 @@ import {
 } from "../pages/api/check-answer";
 import PrimaryButton from "./primary-button";
 import invariant from "tiny-invariant";
+
+const { address } = useWeb3();
+
+if (!address) {
+  return <p>Please connect your wallet to take the quiz!</p>
+}
 
 type Props = {
   questionIndex: number;
